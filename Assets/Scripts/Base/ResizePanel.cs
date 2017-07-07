@@ -8,6 +8,9 @@ public class ResizePanel : MonoBehaviour, IBeginDragHandler, IDragHandler
 	private Vector2 firstClickLocation;
 	private Vector2 originalSizeDelta;
 
+	private bool swapX = false;
+	private bool swapY = false;
+
 	void Start()
 	{
 		Window window = GetComponentInParent<Window> ();
@@ -19,6 +22,12 @@ public class ResizePanel : MonoBehaviour, IBeginDragHandler, IDragHandler
 	{
 		originalSizeDelta = rectTransform.sizeDelta;
 		firstClickLocation =  data.position;
+
+		var windowGlobalPosition = new Vector2 (rectTransform.position.x, rectTransform.position.y);
+		var pivotToMouse = data.position - windowGlobalPosition;
+
+		swapY = (pivotToMouse.y < 0);
+		swapX = (pivotToMouse.x < 0);
 	}
 	#endregion
 
@@ -26,7 +35,12 @@ public class ResizePanel : MonoBehaviour, IBeginDragHandler, IDragHandler
 	public void OnDrag (PointerEventData data) 
 	{
 		var mouseDelta = 2 * (data.position - firstClickLocation);
-		mouseDelta.y = -mouseDelta.y;
+
+		if (swapY)
+			mouseDelta.y = -mouseDelta.y;
+
+		if (swapX)
+			mouseDelta.x = -mouseDelta.x;
 
 		rectTransform.sizeDelta = originalSizeDelta + mouseDelta;
 	}
