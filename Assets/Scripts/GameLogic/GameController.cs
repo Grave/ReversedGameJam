@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
     [SerializeField] private GameObject[] spawnableUIPrefabs;
     [SerializeField] private GameObject briefingPanel;
+    [SerializeField] private Image fadeIn;
+    [SerializeField] private float fadeInTime;
+    [SerializeField] private float fadeInClickableCutOff = 0.5f;
     [SerializeField] private GameObject endPanel;
     [SerializeField] private float rocketExplosionDelay = 3.0f;
     [SerializeField] private float delayBetweenSpawns = 2.0f;
@@ -15,6 +19,7 @@ public class GameController : MonoBehaviour {
     private int currentLevel = 1;
     private GameStates currentState = GameStates.INIT_GAME;
     private float delayUntilNextSpawn = 2.0f;
+    private float currentFadeInTime;
 
     private void StartCurrentLevel() {
         InitSpawnableUIsForLevel();
@@ -22,6 +27,24 @@ public class GameController : MonoBehaviour {
         currentState = GameStates.BRIEFING;
         briefingPanel.SetActive(true);
         delayUntilNextSpawn = GetCurrentDelayBetweenSpanws();
+
+        ShowFadeIn();
+    }
+
+    private void ShowFadeIn() {
+        SetFadeInAlpha(1.0f);
+        currentFadeInTime = fadeInTime;
+    }
+
+    private void SetFadeInAlpha(float alpha) {
+        Vector4 color = fadeIn.color;
+        color.w = alpha;
+        fadeIn.color = color;
+        if (alpha > fadeInClickableCutOff) {
+            fadeIn.raycastTarget = true;
+        } else {
+            fadeIn.raycastTarget = false;
+        }
     }
 
     private float GetCurrentDelayBetweenSpanws() {
@@ -44,15 +67,28 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		switch (currentState) {
+            case GameStates.BRIEFING:
+                Briefing();
+                break;
             case GameStates.WORKING:
                 Working();
                 break;
         }
 	}
 
+    private void Briefing() {
+        currentFadeInTime -= Time.deltaTime;
+        if (currentFadeInTime > 0.0f) {
+            SetFadeInAlpha(currentFadeInTime / fadeInTime);
+        } else {
+            SetFadeInAlpha(0.0f);
+        }
+    }
+
     public void StartWorking() {
         briefingPanel.SetActive(false);
         currentState = GameStates.WORKING;
+        SetFadeInAlpha(0.0f);
     }
 
     private void Working() {
@@ -83,7 +119,6 @@ public class GameController : MonoBehaviour {
 
         currentState = GameStates.ROCKET_STARTING;
         BroadcastMessage("PlaySound", "Alarm", SendMessageOptions.DontRequireReceiver);
-
 
         IEnumerator coroutine = Explode(rocketExplosionDelay);
         StartCoroutine(coroutine);
