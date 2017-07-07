@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
 
     [SerializeField] private GameObject[] spawnableUIPrefabs;
     [SerializeField] private GameObject briefingPanel;
+    [SerializeField] private GameObject endPanel;
     [SerializeField] private float rocketExplosionDelay = 3.0f;
     [SerializeField] private float delayBetweenSpawns = 2.0f;
     [SerializeField] private GameObject canvas;
@@ -91,5 +92,6 @@ public class GameController : MonoBehaviour {
     private IEnumerator Explode(float waitTime) {
         yield return new WaitForSeconds(waitTime);
         BroadcastMessage("PlaySound", "Boom", SendMessageOptions.DontRequireReceiver);
+        endPanel.SetActive(true);
     }
 }
