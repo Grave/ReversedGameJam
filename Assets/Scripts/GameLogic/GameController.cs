@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class GameController : JamUtilities.MonoSingleton<GameController> {
 
     [SerializeField] private GameObject[] spawnableUIPrefabs;
-    [SerializeField] private GameObject briefingPanel;
+	[SerializeField] private GameObject briefingPanel;
+    [SerializeField] private DayTimer timer;
     [SerializeField] private Image fadeIn;
     [SerializeField] private float fadeInTime;
     [SerializeField] private float fadeInClickableCutOff = 0.5f;
     [SerializeField] private GameObject endPanel;
     [SerializeField] private float rocketExplosionDelay = 3.0f;
-    [SerializeField] private float delayBetweenSpawns = 2.0f;
+	[SerializeField] private float delayBetweenSpawns = 2.0f;
+    [SerializeField] private float roundTime = 60f;
     [SerializeField] private GameObject canvas;
 
     private List<GameObject> currentlySpawnablePrefabs = new List<GameObject>();
@@ -94,7 +96,17 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
         briefingPanel.SetActive(false);
         currentState = GameStates.WORKING;
         SetFadeInAlpha(0.0f);
+
+		timer.StartCounter(roundTime);
+		StartCoroutine ("RoundTimer");
     }
+
+	IEnumerator RoundTimer()
+	{
+		yield return new WaitForSeconds(roundTime);
+		currentState = GameStates.DAY_END;
+		StartCurrentLevel ();
+	}
 
     private void Working() {
         delayUntilNextSpawn -= Time.deltaTime;
