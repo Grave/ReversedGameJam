@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : JamUtilities.MonoSingleton<GameController> {
 
     [SerializeField] private GameObject[] spawnableUIPrefabs;
     [SerializeField] private GameObject briefingPanel;
@@ -17,6 +17,11 @@ public class GameController : MonoBehaviour {
 
     private List<GameObject> currentlySpawnablePrefabs = new List<GameObject>();
     private int currentLevel = 1;
+    public int CurrentLevel {
+        get {
+            return currentLevel;
+        }
+    }
     private GameStates currentState = GameStates.INIT_GAME;
     private float delayUntilNextSpawn = 2.0f;
     private float currentFadeInTime;
@@ -105,7 +110,7 @@ public class GameController : MonoBehaviour {
         }
 
         int spawnIndex = Random.Range(0, currentlySpawnablePrefabs.Count);
-        GameObject newUi = Instantiate<GameObject>(currentlySpawnablePrefabs[spawnIndex],canvas.transform);
+        Instantiate<GameObject>(currentlySpawnablePrefabs[spawnIndex],canvas.transform);
     }
 
     public void NukeButtonPressed() {
@@ -129,4 +134,5 @@ public class GameController : MonoBehaviour {
         BroadcastMessage("PlaySound", "Boom", SendMessageOptions.DontRequireReceiver);
         endPanel.SetActive(true);
     }
+
 }
