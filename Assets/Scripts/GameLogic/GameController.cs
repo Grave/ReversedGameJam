@@ -5,9 +5,11 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     [SerializeField] private GameObject[] spawnableUIPrefabs;
-    [SerializeField] private GameObject briefingPanel;
+	[SerializeField] private GameObject briefingPanel;
+	[SerializeField] private DayTimer timerPanel;
     [SerializeField] private float rocketExplosionDelay = 3.0f;
-    [SerializeField] private float delayBetweenSpawns = 2.0f;
+	[SerializeField] private float delayBetweenSpawns = 2.0f;
+    [SerializeField] private float roundTime = 40.0f;
     [SerializeField] private GameObject canvas;
 
     private List<GameObject> currentlySpawnablePrefabs = new List<GameObject>();
@@ -52,7 +54,17 @@ public class GameController : MonoBehaviour {
     public void StartWorking() {
         briefingPanel.SetActive(false);
         currentState = GameStates.WORKING;
+
+		timerPanel.StartCounter(roundTime);
+		StartCoroutine ("RoundTimer");
     }
+
+	IEnumerator RoundTimer()
+	{
+		yield return new WaitForSeconds (roundTime);
+		currentState = GameStates.DAY_END;
+		StartCurrentLevel ();
+	}
 
     private void Working() {
         delayUntilNextSpawn -= Time.deltaTime;
