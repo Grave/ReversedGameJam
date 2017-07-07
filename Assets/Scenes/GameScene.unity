@@ -866,11 +866,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114373673480080326, guid: 3930dea748387a44d91ab5d6b364b409,
-        type: 2}
-      propertyPath: sounds.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4832907846804770, guid: 3930dea748387a44d91ab5d6b364b409, type: 2}
       propertyPath: m_LocalPosition.x
       value: 304.5
@@ -908,16 +903,11 @@ Prefab:
       propertyPath: briefingPanel
       value: 
       objectReference: {fileID: 708539119}
-    - target: {fileID: 114373673480080326, guid: 3930dea748387a44d91ab5d6b364b409,
+    - target: {fileID: 114252083274907110, guid: 3930dea748387a44d91ab5d6b364b409,
         type: 2}
-      propertyPath: sounds.Array.data[2].key
-      value: Alarm
-      objectReference: {fileID: 0}
-    - target: {fileID: 114373673480080326, guid: 3930dea748387a44d91ab5d6b364b409,
-        type: 2}
-      propertyPath: sounds.Array.data[2].clip
+      propertyPath: canvas
       value: 
-      objectReference: {fileID: 8300000, guid: e76f704c55b049d4da9d1ebe2e9bfac8, type: 3}
+      objectReference: {fileID: 63356009}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3930dea748387a44d91ab5d6b364b409, type: 2}
   m_IsPrefabParent: 0

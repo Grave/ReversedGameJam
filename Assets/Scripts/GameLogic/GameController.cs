@@ -7,16 +7,24 @@ public class GameController : MonoBehaviour {
     [SerializeField] private GameObject[] spawnableUIPrefabs;
     [SerializeField] private GameObject briefingPanel;
     [SerializeField] private float rocketExplosionDelay = 3.0f;
+    [SerializeField] private float delayBetweenSpawns = 2.0f;
+    [SerializeField] private GameObject canvas;
 
     private List<GameObject> currentlySpawnablePrefabs = new List<GameObject>();
     private int currentLevel = 1;
     private GameStates currentState = GameStates.INIT_GAME;
+    private float delayUntilNextSpawn = 2.0f;
 
     private void StartCurrentLevel() {
         InitSpawnableUIsForLevel();
         BroadcastMessage("PlaySound", "MorningCrow", SendMessageOptions.DontRequireReceiver);
         currentState = GameStates.BRIEFING;
         briefingPanel.SetActive(true);
+        delayUntilNextSpawn = GetCurrentDelayBetweenSpanws();
+    }
+
+    private float GetCurrentDelayBetweenSpanws() {
+        return delayBetweenSpawns;
     }
 
     private void InitSpawnableUIsForLevel() {
@@ -47,7 +55,20 @@ public class GameController : MonoBehaviour {
     }
 
     private void Working() {
+        delayUntilNextSpawn -= Time.deltaTime;
+        if (delayUntilNextSpawn <= 0.0f) {
+            delayUntilNextSpawn = GetCurrentDelayBetweenSpanws();
+            SpawnUI();
+        }
+    }
 
+    private void SpawnUI() {
+        if (currentlySpawnablePrefabs.Count == 0) {
+            return;
+        }
+
+        int spawnIndex = Random.Range(0, currentlySpawnablePrefabs.Count);
+        GameObject newUi = Instantiate<GameObject>(currentlySpawnablePrefabs[spawnIndex],canvas.transform);
     }
 
     public void NukeButtonPressed() {
