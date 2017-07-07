@@ -2,41 +2,32 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ResizePanel : MonoBehaviour, IPointerDownHandler, IDragHandler {
-
-	public Vector2 minSize;
-	public Vector2 maxSize;
-
+public class ResizePanel : MonoBehaviour, IBeginDragHandler, IDragHandler 
+{
 	private RectTransform rectTransform;
-	private Vector2 currentPointerPosition;
-	private Vector2 previousPointerPosition;
+	private Vector2 firstClickLocation;
+	private Vector2 originalSizeDelta;
 
-	void Awake () {
-		rectTransform = transform.parent.GetComponent<RectTransform>();
+	void Start()
+	{
+		rectTransform = transform as RectTransform;
 	}
 
-	public void OnPointerDown (PointerEventData data) {
-		rectTransform.SetAsLastSibling();
-		RectTransformUtility.ScreenPointToLocalPointInRectangle (rectTransform, data.position, data.pressEventCamera, out previousPointerPosition);
+	#region IBeginDragHandler implementation
+	public void OnBeginDrag (PointerEventData data)
+	{
+		originalSizeDelta = rectTransform.sizeDelta;
+		firstClickLocation =  data.position;
 	}
+	#endregion
 
-	public void OnDrag (PointerEventData data) {
-		if (rectTransform == null)
-			return;
+	#region IBeginDragHandler implementation
+	public void OnDrag (PointerEventData data) 
+	{
+		var mouseDelta = 2 * (data.position - firstClickLocation);
+		mouseDelta.y = -mouseDelta.y;
 
-		Vector2 sizeDelta = rectTransform.sizeDelta;
-
-		RectTransformUtility.ScreenPointToLocalPointInRectangle (rectTransform, data.position, data.pressEventCamera, out currentPointerPosition);
-		Vector2 resizeValue = currentPointerPosition - previousPointerPosition;
-
-		sizeDelta += new Vector2 (resizeValue.x, -resizeValue.y);
-		sizeDelta = new Vector2 (
-			Mathf.Clamp (sizeDelta.x, minSize.x, maxSize.x),
-			Mathf.Clamp (sizeDelta.y, minSize.y, maxSize.y)
-		);
-
-		rectTransform.sizeDelta = sizeDelta;
-
-		previousPointerPosition = currentPointerPosition;
+		rectTransform.sizeDelta = originalSizeDelta + mouseDelta;
 	}
+	#endregion
 }

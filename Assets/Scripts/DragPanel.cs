@@ -5,19 +5,25 @@ using System.Collections;
 
 public class DragPanel : MonoBehaviour, IBeginDragHandler, IDragHandler 
 {
+	private RectTransform rectTransform;
 	private Vector2 pointerOffset;
+
+	void Start()
+	{
+		rectTransform = transform as RectTransform;
+	}
 
 	#region IBeginDragHandler implementation
 	public void OnBeginDrag (PointerEventData data)
 	{
-		var position = new Vector2 (transform.position.x, transform.position.y);
-		pointerOffset =  data.position - position;
+		pointerOffset =  data.position - rectTransform.anchoredPosition;
 	}
 	#endregion
 
 	#region IBeginDragHandler implementation
-	public void OnDrag (PointerEventData data) {
-		transform.position = data.position - pointerOffset;// ClampToWindow(data);
+	public void OnDrag (PointerEventData data) 
+	{
+		rectTransform.anchoredPosition = data.position - pointerOffset;
 	}
 	#endregion
 }
