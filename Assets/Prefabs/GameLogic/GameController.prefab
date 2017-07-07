@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnableUIPrefabs: []
+  briefingPanel: {fileID: 0}
 --- !u!114 &114373673480080326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,3 +178,5 @@ MonoBehaviour:
   sounds:
   - key: MorningCrow
     clip: {fileID: 8300000, guid: 1f5527016b8bde14f9c272de87ca07ab, type: 3}
+  - key: Boom
+    clip: {fileID: 8300000, guid: 9cb429017e2663843bf6226ee6caca15, type: 3}

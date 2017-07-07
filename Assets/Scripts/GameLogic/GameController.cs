@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour {
 
     [SerializeField] private GameObject[] spawnableUIPrefabs;
     [SerializeField] private GameObject briefingPanel;
+    [SerializeField] private float rocketExplosionDelay = 3.0f;
+
     private List<GameObject> currentlySpawnablePrefabs = new List<GameObject>();
     private int currentLevel = 1;
     private GameStates currentState = GameStates.INIT_GAME;
@@ -46,5 +48,27 @@ public class GameController : MonoBehaviour {
 
     private void Working() {
 
+    }
+
+    public void NukeButtonPressed() {
+        StartRockets();
+    }
+
+    public void StartRockets() {
+        if (currentState != GameStates.WORKING) {
+            return;
+        }
+
+        currentState = GameStates.ROCKET_STARTING;
+        BroadcastMessage("PlaySound", "Alarm", SendMessageOptions.DontRequireReceiver);
+
+
+        IEnumerator coroutine = Explode(rocketExplosionDelay);
+        StartCoroutine(coroutine);
+    }
+
+    private IEnumerator Explode(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        BroadcastMessage("PlaySound", "Boom", SendMessageOptions.DontRequireReceiver);
     }
 }

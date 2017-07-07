@@ -7,5 +7,6 @@ public enum GameStates {
     BRIEFING,
     WORKING,
     DAY_END,
+    ROCKET_STARTING,
     GAME_END
 }

@@ -16,6 +16,8 @@ public class SoundController : MonoBehaviour {
 	}
 
     private void Play(AudioClip clip) {
-        GetComponent<AudioSource>().PlayOneShot(clip);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.Stop();
+        audioSource.PlayOneShot(clip);
     }
 }
