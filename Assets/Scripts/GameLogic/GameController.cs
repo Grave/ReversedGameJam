@@ -1,21 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : JamUtilities.MonoSingleton<GameController> {
 
     [SerializeField] private GameObject[] spawnableUIPrefabs;
-	[SerializeField] private GameObject briefingPanel;
-	[SerializeField] private DayTimer timerPanel;
+    [SerializeField] private GameObject briefingPanel;
+    [SerializeField] private Image fadeIn;
+    [SerializeField] private float fadeInTime;
+    [SerializeField] private float fadeInClickableCutOff = 0.5f;
+    [SerializeField] private GameObject endPanel;
     [SerializeField] private float rocketExplosionDelay = 3.0f;
-	[SerializeField] private float delayBetweenSpawns = 2.0f;
-    [SerializeField] private float roundTime = 40.0f;
+    [SerializeField] private float delayBetweenSpawns = 2.0f;
     [SerializeField] private GameObject canvas;
 
     private List<GameObject> currentlySpawnablePrefabs = new List<GameObject>();
     private int currentLevel = 1;
+    public int CurrentLevel {
+        get {
+            return currentLevel;
+        }
+    }
     private GameStates currentState = GameStates.INIT_GAME;
     private float delayUntilNextSpawn = 2.0f;
+    private float currentFadeInTime;
 
     private void StartCurrentLevel() {
         InitSpawnableUIsForLevel();
@@ -23,6 +32,24 @@ public class GameController : MonoBehaviour {
         currentState = GameStates.BRIEFING;
         briefingPanel.SetActive(true);
         delayUntilNextSpawn = GetCurrentDelayBetweenSpanws();
+
+        ShowFadeIn();
+    }
+
+    private void ShowFadeIn() {
+        SetFadeInAlpha(1.0f);
+        currentFadeInTime = fadeInTime;
+    }
+
+    private void SetFadeInAlpha(float alpha) {
+        Vector4 color = fadeIn.color;
+        color.w = alpha;
+        fadeIn.color = color;
+        if (alpha > fadeInClickableCutOff) {
+            fadeIn.raycastTarget = true;
+        } else {
+            fadeIn.raycastTarget = false;
+        }
     }
 
     private float GetCurrentDelayBetweenSpanws() {
@@ -45,26 +72,29 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		switch (currentState) {
+            case GameStates.BRIEFING:
+                Briefing();
+                break;
             case GameStates.WORKING:
                 Working();
                 break;
         }
 	}
 
+    private void Briefing() {
+        currentFadeInTime -= Time.deltaTime;
+        if (currentFadeInTime > 0.0f) {
+            SetFadeInAlpha(currentFadeInTime / fadeInTime);
+        } else {
+            SetFadeInAlpha(0.0f);
+        }
+    }
+
     public void StartWorking() {
         briefingPanel.SetActive(false);
         currentState = GameStates.WORKING;
-
-		timerPanel.StartCounter(roundTime);
-		StartCoroutine ("RoundTimer");
+        SetFadeInAlpha(0.0f);
     }
-
-	IEnumerator RoundTimer()
-	{
-		yield return new WaitForSeconds (roundTime);
-		currentState = GameStates.DAY_END;
-		StartCurrentLevel ();
-	}
 
     private void Working() {
         delayUntilNextSpawn -= Time.deltaTime;
@@ -80,7 +110,7 @@ public class GameController : MonoBehaviour {
         }
 
         int spawnIndex = Random.Range(0, currentlySpawnablePrefabs.Count);
-        GameObject newUi = Instantiate<GameObject>(currentlySpawnablePrefabs[spawnIndex],canvas.transform);
+        Instantiate<GameObject>(currentlySpawnablePrefabs[spawnIndex],canvas.transform);
     }
 
     public void NukeButtonPressed() {
@@ -95,7 +125,6 @@ public class GameController : MonoBehaviour {
         currentState = GameStates.ROCKET_STARTING;
         BroadcastMessage("PlaySound", "Alarm", SendMessageOptions.DontRequireReceiver);
 
-
         IEnumerator coroutine = Explode(rocketExplosionDelay);
         StartCoroutine(coroutine);
     }
@@ -103,5 +132,7 @@ public class GameController : MonoBehaviour {
     private IEnumerator Explode(float waitTime) {
         yield return new WaitForSeconds(waitTime);
         BroadcastMessage("PlaySound", "Boom", SendMessageOptions.DontRequireReceiver);
+        endPanel.SetActive(true);
     }
+
 }
