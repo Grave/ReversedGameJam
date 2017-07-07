@@ -17,6 +17,8 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     [SerializeField] private float roundTime = 60f;
     [SerializeField] private GameObject canvas;
 
+	private float currentRoundTime;
+
     private List<GameObject> currentlySpawnablePrefabs = new List<GameObject>();
     private int currentLevel = 1;
     public int CurrentLevel {
@@ -27,6 +29,11 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     private GameStates currentState = GameStates.INIT_GAME;
     private float delayUntilNextSpawn = 2.0f;
     private float currentFadeInTime;
+
+	public float GetRoundTimeNormalized()
+	{
+		return currentRoundTime / roundTime;
+	}
 
     private void StartCurrentLevel() {
         InitSpawnableUIsForLevel();
@@ -77,9 +84,13 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
             case GameStates.BRIEFING:
                 Briefing();
                 break;
-            case GameStates.WORKING:
-                Working();
-                break;
+			case GameStates.WORKING:
+				Working ();
+				UpdateRoundTimer ();
+	            break;
+			case GameStates.DAY_END:
+				StartCurrentLevel ();
+				break;
         }
 	}
 
@@ -97,19 +108,24 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
         currentState = GameStates.WORKING;
         SetFadeInAlpha(0.0f);
 
+		currentRoundTime = 0;
 		timer.StartCounter(roundTime);
-		StartCoroutine ("RoundTimer");
     }
 
-	IEnumerator RoundTimer()
+	void UpdateRoundTimer()
 	{
-		yield return new WaitForSeconds(roundTime);
-		currentState = GameStates.DAY_END;
-		StartCurrentLevel ();
+		currentRoundTime += Time.deltaTime;
+
+		if (currentRoundTime >= roundTime) 
+		{
+			currentState = GameStates.DAY_END;
+		}
 	}
 
     private void Working() {
+		
         delayUntilNextSpawn -= Time.deltaTime;
+
         if (delayUntilNextSpawn <= 0.0f) {
             delayUntilNextSpawn = GetCurrentDelayBetweenSpanws();
             SpawnUI();

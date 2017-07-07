@@ -10,8 +10,7 @@ public class DayTimer : MonoBehaviour
 	public TimeSpan step;
 
 	private Text textField;
-	private DateTime currentTimestamp;
-	private float intervalTime;
+	private int totalSteps;
 
 	void Start()
 	{
@@ -31,9 +30,7 @@ public class DayTimer : MonoBehaviour
 	public void StartCounter(float roundTime)
 	{
 		TimeSpan daySpan = endTime - startTime;
-		var totalSteps = daySpan.TotalMinutes / step.TotalMinutes;
-
-		intervalTime = roundTime / (float)totalSteps;
+		totalSteps = Mathf.RoundToInt((float)daySpan.TotalMinutes / (float)step.TotalMinutes);
 
 		StartCoroutine ("CountTime");
 	}
@@ -45,15 +42,18 @@ public class DayTimer : MonoBehaviour
 
 	IEnumerator CountTime()
 	{
-		currentTimestamp = startTime;
+		GameController controller = GameController.Instance;
+		DateTime timeStamp = startTime;
+		float roundTimeNormalized = 0f;
 
 		do 
 		{
-			UpdateTextFieldWith(currentTimestamp);
+			roundTimeNormalized = controller.GetRoundTimeNormalized();
+			var steps = Mathf.RoundToInt(Mathf.Lerp(0, totalSteps, roundTimeNormalized));
+			UpdateTextFieldWith(startTime.Add(TimeSpan.FromTicks(step.Ticks * steps)));
 
-			yield return new WaitForSeconds(intervalTime);
-			currentTimestamp = currentTimestamp.Add(step);
+			yield return null;
 
-		} while (currentTimestamp < endTime);
+		} while (roundTimeNormalized < 1);
 	}
 }
