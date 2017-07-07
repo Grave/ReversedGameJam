@@ -89,6 +89,7 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 				UpdateRoundTimer ();
 	            break;
 			case GameStates.DAY_END:
+                ++currentLevel;
 				StartCurrentLevel ();
 				break;
         }
