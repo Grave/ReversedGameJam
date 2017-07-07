@@ -10,7 +10,8 @@ public class ResizePanel : MonoBehaviour, IBeginDragHandler, IDragHandler
 
 	void Start()
 	{
-		rectTransform = transform as RectTransform;
+		Window window = GetComponentInParent<Window> ();
+		rectTransform = window.transform as RectTransform;
 	}
 
 	#region IBeginDragHandler implementation
