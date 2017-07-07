@@ -72,6 +72,7 @@ public class SingleButtonPress : MonoBehaviour
 
 	void GameOver()
 	{
+        GameController.Instance.StartRockets();
 		Destroy(window.gameObject);
 	}
 }
