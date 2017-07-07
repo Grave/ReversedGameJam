@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class DragPanel : MonoBehaviour, IBeginDragHandler, IDragHandler {
-
+public class DragPanel : MonoBehaviour, IBeginDragHandler, IDragHandler 
+{
 	private Vector2 pointerOffset;
 
 	#region IBeginDragHandler implementation
@@ -15,7 +15,9 @@ public class DragPanel : MonoBehaviour, IBeginDragHandler, IDragHandler {
 	}
 	#endregion
 
+	#region IBeginDragHandler implementation
 	public void OnDrag (PointerEventData data) {
 		transform.position = data.position - pointerOffset;// ClampToWindow(data);
 	}
+	#endregion
 }
