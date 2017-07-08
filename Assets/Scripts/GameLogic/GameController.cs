@@ -34,6 +34,7 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     private float delayUntilNextSpawn = 2.0f;
     private float currentFadeInTime;
     private float currentFadeOutTime;
+	private RuleController ruleController = new RuleController();
 
     public float GetRoundTimeNormalized()
 	{
@@ -46,6 +47,10 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
         currentState = GameStates.BRIEFING;
         briefingPanel.SetActive(true);
         delayUntilNextSpawn = GetCurrentDelayBetweenSpanws();
+
+		ruleController.OnDay(currentLevel);
+		var briefingText = briefingPanel.GetComponent<BriefingText> ();
+		briefingText.SetBriefingTextTo (ruleController.GetCreatedRuleDescriptions ());
 
         ShowFadeIn();
     }
@@ -163,7 +168,9 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 
         int spawnIndex = Random.Range(0, currentlySpawnablePrefabs.Count);
         GameObject currentSpawnablePrefab = currentlySpawnablePrefabs[spawnIndex];
-        Instantiate<GameObject>(currentSpawnablePrefab, canvas.transform);
+        var spawned = Instantiate<GameObject>(currentSpawnablePrefab, canvas.transform);
+
+		ruleController.RandomizeObject (spawned);
 
         ElementAttributes eA = currentSpawnablePrefab.GetComponent<ElementAttributes>();
         if (eA.IsUnique) {

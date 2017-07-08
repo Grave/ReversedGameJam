@@ -43,7 +43,6 @@ public class DayTimer : MonoBehaviour
 	IEnumerator CountTime()
 	{
 		GameController controller = GameController.Instance;
-		DateTime timeStamp = startTime;
 		float roundTimeNormalized = 0f;
 
 		do 

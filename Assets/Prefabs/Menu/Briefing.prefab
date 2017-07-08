@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 224013733198457370}
   - component: {fileID: 222671380165123218}
   - component: {fileID: 114019194094389890}
+  - component: {fileID: 114180817143617206}
   m_Layer: 5
   m_Name: Briefing
   m_TagString: Untagged
@@ -141,6 +142,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114180817143617206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1416284821591456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51055ca653ce427e9e123a04ae4149f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  briefingText: {fileID: 114677231686768184}
 --- !u!114 &114199227755579322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -458,7 +471,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 444.61188, y: -176.57146}
+  m_AnchoredPosition: {x: 444.61166, y: -176.57146}
   m_SizeDelta: {x: 889.224, y: 353.1429}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224843014981539054

@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 222081409279556476}
   - component: {fileID: 114050016707715396}
   - component: {fileID: 114186929363695758}
+  - component: {fileID: 114064811576090786}
   m_Layer: 5
   m_Name: SingleButtonPress
   m_TagString: Untagged
@@ -175,6 +176,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be767768deaca4b8db3d4fa7c0447057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114064811576090786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1481525623037570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dbe06f608f2d4e9ab9411c9230e6c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toOverride: {fileID: 114499502283880232}
 --- !u!114 &114084388249586702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -553,8 +566,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -111, y: 11}
-  m_SizeDelta: {x: -465, y: -159}
+  m_AnchoredPosition: {x: -169, y: 49}
+  m_SizeDelta: {x: -530.5, y: -236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224147770948012854
 RectTransform:
