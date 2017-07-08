@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 223788490962860006}
   - component: {fileID: 114586359631024740}
   - component: {fileID: 114115272092774954}
+  - component: {fileID: 114228618954308426}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -210,6 +211,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelToLoadName: Credits
+--- !u!114 &114228618954308426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048340292763818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5066ed7071398b4f9e9820afe333d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicTitle: Menu
 --- !u!114 &114277074282794636
 MonoBehaviour:
   m_ObjectHideFlags: 1
