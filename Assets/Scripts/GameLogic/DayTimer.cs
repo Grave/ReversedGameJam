@@ -11,6 +11,7 @@ public class DayTimer : MonoBehaviour
 
 	private Text textField;
 	private int totalSteps;
+	private DateTime currentTime;
 
 	void Start()
 	{
@@ -40,6 +41,11 @@ public class DayTimer : MonoBehaviour
 		textField.text = timeStamp.ToString("hh:mm tt");
 	}
 
+	public DateTime GetCurrentTime()
+	{
+		return currentTime;
+	}
+
 	IEnumerator CountTime()
 	{
 		GameController controller = GameController.Instance;
@@ -49,7 +55,8 @@ public class DayTimer : MonoBehaviour
 		{
 			roundTimeNormalized = controller.GetRoundTimeNormalized();
 			var steps = Mathf.RoundToInt(Mathf.Lerp(0, totalSteps, roundTimeNormalized));
-			UpdateTextFieldWith(startTime.Add(TimeSpan.FromTicks(step.Ticks * steps)));
+			currentTime = startTime.Add(TimeSpan.FromTicks(step.Ticks * steps));
+			UpdateTextFieldWith(currentTime);
 
 			yield return null;
 

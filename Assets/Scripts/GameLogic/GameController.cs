@@ -60,6 +60,11 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
         currentFadeInTime = fadeInTime;
     }
 
+	public System.DateTime GetCurrentTime()
+	{
+		return timer.GetCurrentTime ();
+	}
+
     private void SetFadeInAlpha(float alpha) {
         Vector4 color = fadeIn.color;
         color.w = alpha;

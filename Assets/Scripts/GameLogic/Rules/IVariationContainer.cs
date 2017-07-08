@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IVariationContainer
 {
 	List<ButtonColorAdj> GetButtonColors ();
+	List<PressedTimeAdj> GetPressedTimes ();
 }

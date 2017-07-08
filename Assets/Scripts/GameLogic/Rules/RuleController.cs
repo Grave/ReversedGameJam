@@ -10,6 +10,7 @@ public class RuleController : IVariationContainer
 
 	//Variation pools
 	private List<ButtonColorAdj> buttonColors;
+	private List<PressedTimeAdj> pressTimes;
 
 	private List<IRule> availableRules;
 	private List<IRule> selectedRules;
@@ -22,6 +23,7 @@ public class RuleController : IVariationContainer
 		variationsAdded = new List<string> ();
 
 		buttonColors = new List<ButtonColorAdj> ();
+		pressTimes = new List<PressedTimeAdj> ();
 
 		availableRules = new List<IRule> ();
 		selectedRules = new List<IRule> ();
@@ -34,6 +36,10 @@ public class RuleController : IVariationContainer
 		return buttonColors;
 	}
 
+	public List<PressedTimeAdj> GetPressedTimes ()
+	{
+		return pressTimes;
+	}
 	#endregion
 
 	public void OnDay(int dayNumber)
@@ -49,7 +55,11 @@ public class RuleController : IVariationContainer
 
 				variationsAdded.Add ("New button color: White\n");
 				variationsAdded.Add ("New button color: Red\n");
-				availableRules.Add (new DontPressColor ());
+
+				pressTimes.Add (PressedTimeAdj.MORNING);
+
+				//availableRules.Add (new DontPressColor ());
+				availableRules.Add (new PressColorAtTime ());
 				++maxRulesAllowed;
 				break;
 			}
@@ -58,6 +68,8 @@ public class RuleController : IVariationContainer
 				++maxRulesAllowed;
 				buttonColors.Add (ButtonColorAdj.GREEN);
 				variationsAdded.Add ("New button color: Green\n");
+
+				pressTimes.Add (PressedTimeAdj.EVEN);
 
 				availableRules.Add (new DontPressColor ());
 
