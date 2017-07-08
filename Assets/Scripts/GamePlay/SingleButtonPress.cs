@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class SingleButtonPress : MonoBehaviour 
 {
-	public float activationInterval;
+    [SerializeField] private bool pressOnlyOnce = false;
+    [SerializeField] private string buttonInteractionText = "PRESS THE BUTTON: ";
+
+    public float activationInterval;
 	public float actionTime;
 	public Text textToUpdate;
 
@@ -34,7 +37,7 @@ public class SingleButtonPress : MonoBehaviour
 
 			do {
 				timer -= Time.deltaTime;
-				textToUpdate.text = "PRESS THE BUTTON! " + timer.ToString("F2");
+				textToUpdate.text = buttonInteractionText + timer.ToString("F2");
 
 				yield return null;
 
@@ -45,11 +48,15 @@ public class SingleButtonPress : MonoBehaviour
 				GameOver();
 			}
 
-			var extraTime = Mathf.Max(0, timer);
-			timer = 0;
+            if (pressOnlyOnce) {
+                Destroy(window.gameObject);
+            } else {
+                var extraTime = Mathf.Max(0, timer);
+                timer = 0;
 
-			textToUpdate.text = "";
-			yield return new WaitForSeconds(activationInterval + extraTime);
+                textToUpdate.text = "";
+                yield return new WaitForSeconds(activationInterval + extraTime);
+            }
 		}
 	}
 
