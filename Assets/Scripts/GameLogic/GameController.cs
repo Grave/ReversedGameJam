@@ -14,10 +14,12 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     [SerializeField] private GameObject endPanel;
     [SerializeField] private float rocketExplosionDelay = 3.0f;
 	[SerializeField] private float delayBetweenSpawns = 2.0f;
+    [SerializeField] private int maxPersistentElement = 3;
     [SerializeField] private float roundTime = 60f;
     [SerializeField] private GameObject canvas;
 
 	private float currentRoundTime;
+    private int currentPresistentElements = 0;
 
     private List<GameObject> currentlySpawnablePrefabs = new List<GameObject>();
     private int currentLevel = 1;
@@ -145,6 +147,25 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
         ElementAttributes eA = currentSpawnablePrefab.GetComponent<ElementAttributes>();
         if (eA.IsUnique) {
             currentlySpawnablePrefabs.RemoveAt(spawnIndex);
+        }
+
+        if (eA.IsPersistent) {
+            ++currentPresistentElements;
+            if (currentPresistentElements >= maxPersistentElement) {
+                PurgetPersistentElements();
+            }
+        }
+    }
+
+    public void PurgetPersistentElements() {
+        for (int i = 0; i <currentlySpawnablePrefabs.Count;) {
+            GameObject currentSpawnablePrefab = currentlySpawnablePrefabs[i];
+            ElementAttributes eA = currentSpawnablePrefab.GetComponent<ElementAttributes>();
+            if (eA.IsPersistent) {
+                currentlySpawnablePrefabs.RemoveAt(i);
+            } else {
+                ++i;
+            }
         }
     }
 

@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnableUIPrefabs:
   - {fileID: 1481525623037570, guid: 8460faa8e1a954bb084121573efed038, type: 2}
+  - {fileID: 1481525623037570, guid: 8460faa8e1a954bb084121573efed038, type: 2}
   briefingPanel: {fileID: 0}
   timer: {fileID: 0}
   fadeIn: {fileID: 0}
@@ -172,7 +173,8 @@ MonoBehaviour:
   fadeInClickableCutOff: 0.5
   endPanel: {fileID: 0}
   rocketExplosionDelay: 3
-  delayBetweenSpawns: 2
+  delayBetweenSpawns: 15
+  maxPersistentElement: 3
   roundTime: 60
   canvas: {fileID: 0}
 --- !u!114 &114313178504673776
