@@ -11,6 +11,8 @@ public class RuleController : IVariationContainer
 	//Variation pools
 	private List<ButtonColorAdj> buttonColors;
 	private List<PressedTimeAdj> pressTimes;
+	private List<string> persistantButtonNames;
+	private List<string> oneShotButtonNames;
 
 	private List<IRule> availableRules;
 	private List<IRule> selectedRules;
@@ -24,6 +26,8 @@ public class RuleController : IVariationContainer
 
 		buttonColors = new List<ButtonColorAdj> ();
 		pressTimes = new List<PressedTimeAdj> ();
+		persistantButtonNames = new List<string> ();
+		oneShotButtonNames = new List<string> ();
 
 		availableRules = new List<IRule> ();
 		selectedRules = new List<IRule> ();
@@ -52,9 +56,13 @@ public class RuleController : IVariationContainer
 			{
 				buttonColors.Add (ButtonColorAdj.WHITE);
 				buttonColors.Add (ButtonColorAdj.RED);
+				oneShotButtonNames.Add ("Guilherme");
+				persistantButtonNames.Add ("Cooling reactor");
 
 				variationsAdded.Add ("New button color: White\n");
 				variationsAdded.Add ("New button color: Red\n");
+				variationsAdded.Add ("New message Source: Radu\n");
+				variationsAdded.Add ("New systems: Cooling reactors\n");
 
 				pressTimes.Add (PressedTimeAdj.MORNING);
 
@@ -67,7 +75,12 @@ public class RuleController : IVariationContainer
 			{
 				++maxRulesAllowed;
 				buttonColors.Add (ButtonColorAdj.GREEN);
+				oneShotButtonNames.Add ("Phillip");
+				persistantButtonNames.Add ("Heating reactor");
+
 				variationsAdded.Add ("New button color: Green\n");
+				variationsAdded.Add ("New message Source: Phillip\n");
+				variationsAdded.Add ("New systems: Heating reactors\n");
 
 				pressTimes.Add (PressedTimeAdj.EVEN);
 
@@ -91,6 +104,13 @@ public class RuleController : IVariationContainer
 		ButtonColor btnColor = obj.GetComponent<ButtonColor> ();
 		if (btnColor) {
 			btnColor.SetColorAdj (GetRandomFrom (buttonColors));
+		}
+
+		NameSource nameSrc = obj.GetComponent<NameSource> ();
+		ElementAttributes elmAttr = obj.GetComponent<ElementAttributes> ();
+
+		if (nameSrc && elmAttr) {
+			nameSrc.SetNameSource (GetRandomFrom (elmAttr.IsPersistent ? persistantButtonNames : oneShotButtonNames)); 
 		}
 	}
 
