@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!114 &186895367
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6102941, g: 0.6102941, b: 0.6102941, a: 1}
+  m_Color: {r: 0.08088237, g: 0.07255624, b: 0.07255624, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -186,7 +186,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letterTime: 0.1
   dramaticPauseTime: 2
+  redButtonTypeTime: 1
 --- !u!82 &186895370
 AudioSource:
   m_ObjectHideFlags: 0
@@ -228,10 +229,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -311,7 +312,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - key: KeyStroke
-    clip: {fileID: 8300000, guid: 04d5b7db6ebd808409adaec81402ab0a, type: 3}
+    clip: {fileID: 8300000, guid: fda5120dbdcd3424c925d5e7d0d88192, type: 3}
+  - key: CarrigeReturn
+    clip: {fileID: 8300000, guid: e208b42c4ab0a3d4d8a9cc4f133f9dbc, type: 3}
 --- !u!1 &695670034
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +576,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 5daead52edb08cd419aab78e264e28f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da2e80f827c682e4bad0eddc6f546da1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1030,7 +1033,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.11764705, g: 0.11764705, b: 0.11764705, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
