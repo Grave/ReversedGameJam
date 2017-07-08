@@ -49,6 +49,8 @@ public class RuleController : IVariationContainer
 
 				variationsAdded.Add ("New button color: White\n");
 				variationsAdded.Add ("New button color: Red\n");
+				availableRules.Add (new DontPressColor ());
+				++maxRulesAllowed;
 				break;
 			}
 		case 2:
@@ -78,6 +80,17 @@ public class RuleController : IVariationContainer
 		if (btnColor) {
 			btnColor.SetColorAdj (GetRandomFrom (buttonColors));
 		}
+	}
+
+	public int Score(GameObject obj)
+	{
+		int totalScore = 0;
+		foreach (var rule in selectedRules) 
+		{
+			totalScore += rule.Score (obj);
+		}
+
+		return totalScore;
 	}
 
 	void CreateRules()

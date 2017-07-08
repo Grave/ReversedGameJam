@@ -40,7 +40,7 @@ public class SingleButtonPress : MonoBehaviour
 
 			} while(timer > 0 && !buttonPressed);
 
-			if (!buttonPressed)
+			if (!buttonPressed && ShouldBePressed())
 			{
 				GameOver();
 			}
@@ -60,7 +60,13 @@ public class SingleButtonPress : MonoBehaviour
 
 	public void OnButtonClicked()
 	{
-		if (!IsActive()) 
+		if (!ShouldBePressed()) 
+		{
+			GameOver ();
+			return;
+		}
+
+		if (!IsActive())
 		{
 			GameOver ();
 		}
@@ -68,6 +74,12 @@ public class SingleButtonPress : MonoBehaviour
 		{
 			buttonPressed = true;
 		}
+	}
+
+	bool ShouldBePressed()
+	{
+		int score = GameController.Instance.ScoreAccordingToRules (gameObject);
+		return score >= 0;
 	}
 
 	void GameOver()

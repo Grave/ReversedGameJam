@@ -17,7 +17,7 @@ public class DontPressColor : IRule
 		ButtonColor color = obj.GetComponent<ButtonColor>();
 		if (color) 
 		{
-			return color.GetAdj() == colorAdj ? 1 : -1;
+			return color.GetAdj() == colorAdj ? -1 : 0;
 		}
 
 		return 0;

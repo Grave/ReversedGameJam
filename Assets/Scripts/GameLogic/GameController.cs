@@ -228,4 +228,8 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
         endPanel.SetActive(true);
     }
 
+	public int ScoreAccordingToRules(GameObject obj)
+	{
+		return ruleController.Score (obj);
+	}
 }
