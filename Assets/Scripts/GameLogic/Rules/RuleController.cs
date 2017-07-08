@@ -44,6 +44,17 @@ public class RuleController : IVariationContainer
 	{
 		return pressTimes;
 	}
+
+	public List<string> GetAllNames ()
+	{
+		List<string> allNames = new List<string> ();
+
+		allNames.AddRange(persistantButtonNames);
+		allNames.AddRange(oneShotButtonNames);
+
+		return allNames;
+	}
+
 	#endregion
 
 	public void OnDay(int dayNumber)
@@ -61,14 +72,14 @@ public class RuleController : IVariationContainer
 
 				variationsAdded.Add ("New button color: White\n");
 				variationsAdded.Add ("New button color: Red\n");
-				variationsAdded.Add ("New message Source: Radu\n");
+				variationsAdded.Add ("New message Source: Guilherme\n");
 				variationsAdded.Add ("New systems: Cooling reactors\n");
 
 				pressTimes.Add (PressedTimeAdj.MORNING);
 
-				//availableRules.Add (new DontPressColor ());
-				availableRules.Add (new PressColorAtTime ());
+				availableRules.Add (new IgnoreMessageFrom ());
 				++maxRulesAllowed;
+
 				break;
 			}
 		case 2:
@@ -85,6 +96,7 @@ public class RuleController : IVariationContainer
 				pressTimes.Add (PressedTimeAdj.EVEN);
 
 				availableRules.Add (new DontPressColor ());
+				availableRules.Add (new PressColorAtTime ());
 
 				break;
 			}

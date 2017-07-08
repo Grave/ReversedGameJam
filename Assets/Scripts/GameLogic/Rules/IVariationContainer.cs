@@ -6,4 +6,5 @@ public interface IVariationContainer
 {
 	List<ButtonColorAdj> GetButtonColors ();
 	List<PressedTimeAdj> GetPressedTimes ();
+	List<string> GetAllNames ();
 }

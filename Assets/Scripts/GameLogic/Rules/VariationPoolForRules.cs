@@ -6,11 +6,13 @@ public class VariationPoolForRules
 {
 	private List<ButtonColorAdj> colorAdj;
 	private List<PressedTimeAdj> timeAdj;
+	private List<string> allNames;
 
 	public VariationPoolForRules(IVariationContainer copyFrom)
 	{
 		colorAdj = new List<ButtonColorAdj> (copyFrom.GetButtonColors ());
 		timeAdj = new List<PressedTimeAdj> (copyFrom.GetPressedTimes ());
+		allNames = new List<string> (copyFrom.GetAllNames ());
 	}
 
 	public ButtonColorAdj PopRandomColor()
@@ -21,6 +23,11 @@ public class VariationPoolForRules
 	public PressedTimeAdj PopRandomPressTime()
 	{
 		return PopRandomFrom (timeAdj);
+	}
+
+	public string PopRandomName()
+	{
+		return PopRandomFrom (allNames);
 	}
 
 	private T PopRandomFrom<T>(List<T> list)

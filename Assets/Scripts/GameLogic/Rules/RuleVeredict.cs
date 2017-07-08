@@ -20,7 +20,7 @@ public class RuleVeredict
 
 	public bool Pass()
 	{
-		return score > 0;
+		return score >= 0;
 	}
 
 	public void AddFailureReason(string reason)
