@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicController : JamUtilities.MonoSingleton<MusicController> {
-    [SerializeField] private PlaySound[] musics;
+    [SerializeField] private PlaySound[] musics = { };
     [SerializeField] private string currentMusic;
 
     public void PlayMusic(string key) {
         if (key == currentMusic) {
+            return;
+        }
+
+        if (musics.Length == 0) {
             return;
         }
 
