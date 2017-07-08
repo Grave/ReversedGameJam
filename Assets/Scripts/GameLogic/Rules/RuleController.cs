@@ -2,21 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuleController
+public class RuleController : IVariationContainer
 {
 	public int currentDayCache;
+	public int maxRulesAllowed;
 	private List<string> variationsAdded;
 
 	//Variation pools
 	private List<ButtonColorAdj> buttonColors;
 
-	//private List<Rule> rules;
+	private List<IRule> availableRules;
+	private List<IRule> selectedRules;
 
 	public RuleController()
 	{
-		buttonColors = new List<ButtonColorAdj> ();
+		currentDayCache = 0;
+		maxRulesAllowed = 0;
+
 		variationsAdded = new List<string> ();
+
+		buttonColors = new List<ButtonColorAdj> ();
+
+		availableRules = new List<IRule> ();
+		selectedRules = new List<IRule> ();
 	}
+
+	#region IVariationContainer implementation
+
+	public List<ButtonColorAdj> GetButtonColors ()
+	{
+		return buttonColors;
+	}
+
+	#endregion
 
 	public void OnDay(int dayNumber)
 	{
@@ -35,8 +53,12 @@ public class RuleController
 			}
 		case 2:
 			{
+				++maxRulesAllowed;
 				buttonColors.Add (ButtonColorAdj.GREEN);
 				variationsAdded.Add ("New button color: Green\n");
+
+				availableRules.Add (new DontPressColor ());
+
 				break;
 			}
 		}
@@ -60,7 +82,21 @@ public class RuleController
 
 	void CreateRules()
 	{
-		
+		selectedRules.Clear ();
+
+		var variationPool = new VariationPoolForRules (this);
+		var usableRules = new List<IRule> (availableRules);
+
+		for (int i = 0; i < maxRulesAllowed; ++i) 
+		{
+			int rngIndex = Random.Range (0, usableRules.Count);
+			var rule = usableRules[rngIndex];
+			usableRules.RemoveAt (rngIndex);
+
+			rule.RandomizeFrom (variationPool);
+			variationsAdded.Add(rule.GetDescription ());
+			selectedRules.Add (rule);
+		}
 	}
 
 	public string GetCreatedRuleDescriptions()

@@ -13,7 +13,7 @@ public enum ButtonColorAdj
 
 public class ButtonColorTranslator
 {
-	private static string[] description = new string[]{ "gree", "red", "white", "blue" };
+	private static string[] description = new string[]{ "Gree", "Red", "White", "Blue" };
 
 	public static string GetDescriptionFor(ButtonColorAdj color)
 	{
