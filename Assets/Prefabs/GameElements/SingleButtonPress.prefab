@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 224059623779395612}
   - component: {fileID: 222081409279556476}
   - component: {fileID: 114050016707715396}
-  - component: {fileID: 114501096446378224}
+  - component: {fileID: 114186929363695758}
   m_Layer: 5
   m_Name: SingleButtonPress
   m_TagString: Untagged
@@ -219,6 +219,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Button
+--- !u!114 &114186929363695758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1481525623037570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f5f552e3383e345b7064d2c67dd7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUnique: 0
+  isPersistent: 0
+  minLevel: 0
+  maxLevel: -1
 --- !u!114 &114253336917238138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,18 +340,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114501096446378224
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1481525623037570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7860369af58fbdb44813c964e333f0dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minLevel: 0
 --- !u!114 &114636486562528708
 MonoBehaviour:
   m_ObjectHideFlags: 1

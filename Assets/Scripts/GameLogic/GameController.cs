@@ -68,7 +68,7 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     private void InitSpawnableUIsForLevel() {
         currentlySpawnablePrefabs.Clear();
         foreach (var spawnableUIPrefab in spawnableUIPrefabs) {
-            if (spawnableUIPrefab.GetComponent<LevelRequirement>().IsValidForLevel(currentLevel)) {
+            if (spawnableUIPrefab.GetComponent<ElementAttributes>().IsValidForLevel(currentLevel)) {
                 currentlySpawnablePrefabs.Add(spawnableUIPrefab);
             }
         }
@@ -117,8 +117,8 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 	{
 		currentRoundTime += Time.deltaTime;
 
-		if (currentRoundTime >= roundTime) 
-		{
+		if (currentRoundTime >= roundTime) {
+            DestroyAllActiveWindows();
 			currentState = GameStates.DAY_END;
 		}
 	}
@@ -139,7 +139,13 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
         }
 
         int spawnIndex = Random.Range(0, currentlySpawnablePrefabs.Count);
-        Instantiate<GameObject>(currentlySpawnablePrefabs[spawnIndex],canvas.transform);
+        GameObject currentSpawnablePrefab = currentlySpawnablePrefabs[spawnIndex];
+        Instantiate<GameObject>(currentSpawnablePrefab, canvas.transform);
+
+        ElementAttributes eA = currentSpawnablePrefab.GetComponent<ElementAttributes>();
+        if (eA.IsUnique) {
+            currentlySpawnablePrefabs.RemoveAt(spawnIndex);
+        }
     }
 
     public void NukeButtonPressed() {
@@ -151,11 +157,20 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
             return;
         }
 
+        DestroyAllActiveWindows();
+
         currentState = GameStates.ROCKET_STARTING;
         BroadcastMessage("PlaySound", "Alarm", SendMessageOptions.DontRequireReceiver);
 
         IEnumerator coroutine = Explode(rocketExplosionDelay);
         StartCoroutine(coroutine);
+    }
+
+    private void DestroyAllActiveWindows() {
+        var windows = GameObject.FindObjectsOfType<Window>();
+        foreach (var window in windows) {
+            Destroy(window.gameObject);
+        }
     }
 
     private IEnumerator Explode(float waitTime) {

@@ -884,6 +884,11 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 63356009}
+    - target: {fileID: 114252083274907110, guid: 3930dea748387a44d91ab5d6b364b409,
+        type: 2}
+      propertyPath: delayBetweenSpawns
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3930dea748387a44d91ab5d6b364b409, type: 2}
   m_IsPrefabParent: 0
