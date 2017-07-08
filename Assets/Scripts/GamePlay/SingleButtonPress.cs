@@ -85,7 +85,7 @@ public class SingleButtonPress : MonoBehaviour
 
 	bool ShouldBePressed()
 	{
-		int score = GameController.Instance.ScoreAccordingToRules (gameObject);
+		int score = GameController.Instance.ScoreAccordingToRules (window.gameObject);
 		return score >= 0;
 	}
 
