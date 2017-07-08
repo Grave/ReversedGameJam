@@ -14,6 +14,12 @@ public class EndText : MonoBehaviour {
 
 	void Start () {
         text = PREFIX + GameController.Instance.CurrentLevel + POSTFIX;
+		var failureReasons = GameController.Instance.GetFailureReasons ();
+
+		text += "\n";
+		foreach (string reason in failureReasons) {
+			text += reason;
+		}
 
         IEnumerator coroutine = TypeEndText();
         StartCoroutine(coroutine);

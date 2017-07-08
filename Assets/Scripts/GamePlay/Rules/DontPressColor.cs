@@ -12,15 +12,16 @@ public class DontPressColor : IRule
 		colorAdj = variationsToUse.PopRandomColor ();
 	}
 
-	public int Score (GameObject obj)
+	public void Test(GameObject obj, RuleVeredict veredict)
 	{
 		ButtonColor color = obj.GetComponent<ButtonColor>();
 		if (color) 
 		{
-			return color.GetAdj() == colorAdj ? -1 : 0;
+			if (color.GetAdj () == colorAdj) {
+				veredict.AddScore (-1);
+				veredict.AddFailureReason ("Did not ignore button that should be ignored");
+			}
 		}
-
-		return 0;
 	}
 
 	public string GetDescription ()

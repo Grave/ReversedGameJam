@@ -114,15 +114,16 @@ public class RuleController : IVariationContainer
 		}
 	}
 
-	public int Score(GameObject obj)
+	public RuleVeredict TestAgaisntRules(GameObject obj)
 	{
-		int totalScore = 0;
+		RuleVeredict veredict = new RuleVeredict ();
+
 		foreach (var rule in selectedRules) 
 		{
-			totalScore += rule.Score (obj);
+			rule.Test (obj, veredict);
 		}
 
-		return totalScore;
+		return veredict;
 	}
 
 	void CreateRules()

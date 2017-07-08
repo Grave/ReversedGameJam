@@ -15,17 +15,20 @@ public class PressColorAtTime : IRule
 		timeAdj = variationsToUse.PopRandomPressTime ();
 	}
 
-	public int Score (GameObject obj)
+	public void Test(GameObject obj, RuleVeredict veredict)
 	{
 		DateTime time = GameController.Instance.GetCurrentTime ();
 
 		ButtonColor color = obj.GetComponent<ButtonColor>();
 		if (color && color.GetAdj () == colorAdj) 
 		{
-			return PressedTimeTranslator.TimeSatisfies (time, timeAdj) ? 1 : -1;
+			if (PressedTimeTranslator.TimeSatisfies (time, timeAdj)) {
+				veredict.AddScore (1);
+			} else {
+				veredict.AddScore (-1);
+				veredict.AddFailureReason ("Pressed button at wrong time of day");
+			}
 		}
-
-		return 0;
 	}
 
 	public string GetDescription ()

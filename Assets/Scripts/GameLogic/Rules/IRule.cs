@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IRule
 {
 	void RandomizeFrom (VariationPoolForRules availableVariations);
-	int Score (GameObject obj);
+	void Test (GameObject obj, RuleVeredict veredict);
 
 	string GetDescription();
 }

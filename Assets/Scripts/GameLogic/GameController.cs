@@ -35,10 +35,16 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     private float currentFadeInTime;
     private float currentFadeOutTime;
 	private RuleController ruleController = new RuleController();
+	private List<string> failureReasons;
 
     public float GetRoundTimeNormalized()
 	{
 		return currentRoundTime / roundTime;
+	}
+
+	public List<string> GetFailureReasons()
+	{
+		return failureReasons;
 	}
 
     private void StartCurrentLevel() {
@@ -203,14 +209,18 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     }
 
     public void NukeButtonPressed() {
-        StartRockets();
+		var failureReason = new List<string> ();
+		failureReason.Add ("You decided to end it yourself..");
+
+		StartRockets(failureReason);
     }
 
-    public void StartRockets() {
+	public void StartRockets(List<string> looseReasons) {
         if (currentState != GameStates.WORKING) {
             return;
         }
 
+		failureReasons = looseReasons;
         DestroyAllActiveWindows();
 
         currentState = GameStates.ROCKET_STARTING;
@@ -233,8 +243,8 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
         endPanel.SetActive(true);
     }
 
-	public int ScoreAccordingToRules(GameObject obj)
+	public RuleVeredict ScoreAccordingToRules(GameObject obj)
 	{
-		return ruleController.Score (obj);
+		return ruleController.TestAgaisntRules (obj);
 	}
 }

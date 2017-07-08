@@ -43,9 +43,10 @@ public class SingleButtonPress : MonoBehaviour
 
 			} while(timer > 0 && !buttonPressed);
 
-			if (!buttonPressed && ShouldBePressed())
+			var veredict = GetRuleVeredict ();
+			if (!buttonPressed && veredict.Pass())
 			{
-				GameOver();
+				GameOver(CompileFailureReasonFor("Button was not pressed in time"));
 			}
 
             if (pressOnlyOnce) {
@@ -67,15 +68,17 @@ public class SingleButtonPress : MonoBehaviour
 
 	public void OnButtonClicked()
 	{
-		if (!ShouldBePressed()) 
+		var veredict = GetRuleVeredict ();
+
+		if (!veredict.Pass()) 
 		{
-			GameOver ();
+			GameOver (veredict.GetFailureReasons());
 			return;
 		}
 
 		if (!IsActive())
 		{
-			GameOver ();
+			GameOver (CompileFailureReasonFor("Button pressed too soon"));
 		}
 		else 
 		{
@@ -83,15 +86,21 @@ public class SingleButtonPress : MonoBehaviour
 		}
 	}
 
-	bool ShouldBePressed()
+	private List<string> CompileFailureReasonFor(string reason)
 	{
-		int score = GameController.Instance.ScoreAccordingToRules (window.gameObject);
-		return score >= 0;
+		var failureReason = new List<string> ();
+		failureReason.Add (reason);
+		return failureReason;
 	}
 
-	void GameOver()
+	RuleVeredict GetRuleVeredict()
 	{
-        GameController.Instance.StartRockets();
+		return GameController.Instance.ScoreAccordingToRules (window.gameObject);
+	}
+
+	void GameOver(List<string> failureReason)
+	{
+		GameController.Instance.StartRockets(failureReason);
 		Destroy(window.gameObject);
 	}
 }
