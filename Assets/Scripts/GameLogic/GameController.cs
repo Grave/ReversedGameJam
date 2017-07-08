@@ -7,9 +7,11 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 
     [SerializeField] private GameObject[] spawnableUIPrefabs;
 	[SerializeField] private GameObject briefingPanel;
+    [SerializeField] private GameObject endOfDayPanel;
     [SerializeField] private DayTimer timer;
     [SerializeField] private Image fadeIn;
     [SerializeField] private float fadeInTime;
+    [SerializeField] private float fadeOutTime = 1.0f;
     [SerializeField] private float fadeInClickableCutOff = 0.5f;
     [SerializeField] private GameObject endPanel;
     [SerializeField] private float rocketExplosionDelay = 3.0f;
@@ -31,8 +33,9 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     private GameStates currentState = GameStates.INIT_GAME;
     private float delayUntilNextSpawn = 2.0f;
     private float currentFadeInTime;
+    private float currentFadeOutTime;
 
-	public float GetRoundTimeNormalized()
+    public float GetRoundTimeNormalized()
 	{
 		return currentRoundTime / roundTime;
 	}
@@ -90,12 +93,18 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 				Working ();
 				UpdateRoundTimer ();
 	            break;
-			case GameStates.DAY_END:
-                ++currentLevel;
-				StartCurrentLevel ();
-				break;
+            case GameStates.DAY_ENDING:
+                DayEnding();
+                break;
         }
 	}
+
+    public void StartNextDay() {
+        endOfDayPanel.SetActive(false);
+        currentPresistentElements = 0;
+        ++currentLevel;
+        StartCurrentLevel();
+    }
 
     private void Briefing() {
         currentFadeInTime -= Time.deltaTime;
@@ -103,6 +112,16 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
             SetFadeInAlpha(currentFadeInTime / fadeInTime);
         } else {
             SetFadeInAlpha(0.0f);
+        }
+    }
+
+    private void DayEnding() {
+        currentFadeOutTime -= Time.deltaTime;
+        if (currentFadeOutTime > 0.0f) {
+            SetFadeInAlpha(1.0f - currentFadeOutTime / fadeOutTime);
+        } else {
+            SetFadeInAlpha(1.0f);
+            currentState = GameStates.DAY_END;
         }
     }
 
@@ -121,8 +140,10 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 
 		if (currentRoundTime >= roundTime) {
             DestroyAllActiveWindows();
-			currentState = GameStates.DAY_END;
-		}
+			currentState = GameStates.DAY_ENDING;
+            currentFadeOutTime = fadeOutTime;
+            endOfDayPanel.SetActive(true);
+        }
 	}
 
     private void Working() {
