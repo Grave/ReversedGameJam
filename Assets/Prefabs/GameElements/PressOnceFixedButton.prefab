@@ -426,7 +426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnique: 0
   isPersistent: 0
-  minLevel: 0
+  minLevel: 4
   maxLevel: -1
 --- !u!114 &114703350189146352
 MonoBehaviour:
@@ -566,7 +566,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textField: {fileID: 114615007421154518}
   fluffTextAfterName:
-  - Stuff
+  - This window is weird
+  - Is everything alright?
+  - It's a trap!
+  - Maybe it's not a trap
+  - CLICK THE BUTTON
+  - We come in peace
 --- !u!222 &222224269070617096
 CanvasRenderer:
   m_ObjectHideFlags: 1

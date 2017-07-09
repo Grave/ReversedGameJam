@@ -553,7 +553,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textField: {fileID: 114615007421154518}
   fluffTextAfterName:
-  - Stuff
+  - Is everything alright?
+  - Did you check the news today?
+  - Today is a good day
+  - Don't click the button ;)
+  - Woah, check out this yourube video
+  - Are you still working?
 --- !u!222 &222224269070617096
 CanvasRenderer:
   m_ObjectHideFlags: 1

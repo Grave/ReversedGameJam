@@ -219,9 +219,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textField: {fileID: 114787572098591414}
   fluffTextAfterName:
-  - Is everything alright?
-  - Are you alright?
-  - This is the best job in the world!
+  - System failure iminent
+  - Google has suggested you to take care of this system
+  - Our in-house engine has encountered issues. You fix it.
+  - Integral failures detected. Requesting human supervision.
+  - Am I I if I am I?
+  - I don't like ants.
 --- !u!114 &114084388249586702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,7 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUnique: 0
   isPersistent: 1
-  minLevel: 0
+  minLevel: 3
   maxLevel: -1
 --- !u!114 &114253336917238138
 MonoBehaviour:
