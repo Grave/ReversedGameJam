@@ -116,6 +116,7 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 	}
 
     public void StartNextDay() {
+        timer.SetTimerToStartTime();
         endOfDayPanel.SetActive(false);
         currentPresistentElements = 0;
         ++currentLevel;

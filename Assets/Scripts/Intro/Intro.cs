@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Intro : MonoBehaviour {
 
@@ -22,6 +23,10 @@ public class Intro : MonoBehaviour {
     [SerializeField] private float letterTime = 0.1f;
     [SerializeField] private float dramaticPauseTime = 2.0f;
     [SerializeField] private float redButtonTypeTime = 1.0f;
+    [SerializeField] private string levelToLoadName;
+    [SerializeField] private Text buttonText;
+
+    private bool skipButtonProgesses = false;
 
     private void Awake() {
         textField = GetComponent<Text>();
@@ -70,5 +75,26 @@ public class Intro : MonoBehaviour {
         yield return new WaitForSeconds(redButtonTypeTime);
         BroadcastMessage("StopSound", SendMessageOptions.DontRequireReceiver);
 
+        skipButtonProgesses = true;
+        buttonText.text = "Main Menu";
+    }
+
+    public void PressSkipButton() {
+        if (skipButtonProgesses) {
+            SceneManager.LoadScene(levelToLoadName);
+        } else {
+            ResetText();
+            skipButtonProgesses = true;
+        }
+    }
+
+    private void ResetText() {
+        BroadcastMessage("StopSound", SendMessageOptions.DontRequireReceiver);
+        StopAllCoroutines();
+        IEnumerator coroutine = TypeEndText();
+        StartCoroutine(coroutine);
+        textField.text = "";
+        currentText = 0;
+        currentIndex = 0;
     }
 }

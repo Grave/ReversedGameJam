@@ -219,6 +219,8 @@ MonoBehaviour:
   letterTime: 0.1
   dramaticPauseTime: 2
   redButtonTypeTime: 1
+  levelToLoadName: StartScene
+  buttonText: {fileID: 2067860057}
 --- !u!82 &186895370
 AudioSource:
   m_ObjectHideFlags: 0
@@ -389,7 +391,6 @@ GameObject:
   - component: {fileID: 815786533}
   - component: {fileID: 815786532}
   - component: {fileID: 815786531}
-  - component: {fileID: 815786530}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -417,18 +418,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -205}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &815786530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 815786528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1f5785362e4f343a493968bd0d688e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelToLoadName: StartScene
 --- !u!114 &815786531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,8 +458,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 815786530}
-        m_MethodName: Execute
+      - m_Target: {fileID: 186895369}
+        m_MethodName: PressSkipButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
