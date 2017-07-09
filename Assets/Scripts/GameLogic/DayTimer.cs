@@ -28,6 +28,10 @@ public class DayTimer : MonoBehaviour
 
 	}
 
+    public void SetTimerToStartTime() {
+        UpdateTextFieldWith(startTime);
+    }
+
 	public void StartCounter(float roundTime)
 	{
 		TimeSpan daySpan = endTime - startTime;
