@@ -181,7 +181,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224006014018881398}
-  - component: {fileID: 114987943339417740}
+  - component: {fileID: 114575651905604464}
   m_Layer: 5
   m_Name: GameElements
   m_TagString: Untagged
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114987943339417740}
+      - m_Target: {fileID: 114575651905604464}
         m_MethodName: OnButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -702,6 +702,28 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114575651905604464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1628676601382486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd9f4956d82889044a0bb34640d57387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressOnlyOnce: 0
+  buttonInteractionText: 'PRESS THE BUTTON: '
+  rotationButton: {fileID: 114662000161959290}
+  options:
+  - North
+  - West
+  - East
+  - South
+  activationInterval: 2
+  actionTime: 10
+  textToUpdate: {fileID: 114263375279019126}
 --- !u!114 &114588501352296830
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -726,7 +748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUnique: 0
-  isPersistent: 0
+  isPersistent: 1
   minLevel: 0
   maxLevel: -1
 --- !u!114 &114662000161959290
@@ -748,9 +770,6 @@ MonoBehaviour:
   xAxis: 1
   invert: 1
   rotationSpeed: 1
-  testText:
-  - gusttf
-  - sdfgsdfg
 --- !u!114 &114687970487605084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -926,22 +945,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114987943339417740
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1628676601382486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2ea91bada2584aca8b83428aa87179f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pressOnlyOnce: 1
-  buttonInteractionText: 'Confirm before:'
-  activationInterval: 2
-  actionTime: 5
-  textToUpdate: {fileID: 114263375279019126}
 --- !u!114 &114995791183926846
 MonoBehaviour:
   m_ObjectHideFlags: 1

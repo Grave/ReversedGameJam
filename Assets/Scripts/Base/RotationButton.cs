@@ -10,16 +10,13 @@ public class RotationButton : MonoBehaviour {
     [SerializeField] bool invert = true;
 
     [SerializeField] float rotationSpeed = 1.0f;
-    [SerializeField] string[] testText;
 
     private bool mouseButtonDown = false;
     private Vector2 oldPosition;
 
-    void Start() {
-        SetOptions(testText);
-    }
 
-    public void SetOptions(string[] optionTexts) { 
+    public void SetOptions(string[] optionTexts) {
+        Shuffle(optionTexts);
         for (int i = 0; i < 4; ++i) {
             if (i < options.Length) {
                 if (i < optionTexts.Length) {
@@ -28,6 +25,16 @@ public class RotationButton : MonoBehaviour {
                     options[i].SetActive(false);
                 }
             }
+        }
+    }
+
+    private void Shuffle(string[] texts) {
+        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
+        for (int t = 0; t < texts.Length; t++) {
+            string tmp = texts[t];
+            int r = Random.Range(t, texts.Length);
+            texts[t] = texts[r];
+            texts[r] = tmp;
         }
     }
 
@@ -62,10 +69,6 @@ public class RotationButton : MonoBehaviour {
         float change = delta * rotationSpeed;
         transform.Rotate(Vector3.forward, change);
         oldPosition = newPos;
-
-        Debug.Log(GetSelected());
-
-     
     }
 
     public string GetSelected() {
