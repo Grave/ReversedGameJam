@@ -194,12 +194,19 @@ MonoBehaviour:
   rocketExplosionDelay: 3
   startDelay:
   - 2
+  - 4
   - 10
+  - 5
+  - 5
   delayBetweenSpawns:
-  - 15
+  - 4
   - 14
   - 14
-  maxPersistentElement: 01000000010000000200000003000000
+  - 12
+  - 10
+  - 8
+  - 7
+  maxPersistentElement: 01000000010000000200000002000000020000000200000003000000
   roundTime: 60
   canvas: {fileID: 0}
 --- !u!114 &114313178504673776
