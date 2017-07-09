@@ -10,6 +10,7 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     [SerializeField] private GameObject endOfDayPanel;
     [SerializeField] private DayTimer timer;
     [SerializeField] private Image fadeIn;
+    [SerializeField] private RedFlash redFlash;
     [SerializeField] private float fadeInTime;
     [SerializeField] private float fadeOutTime = 1.0f;
     [SerializeField] private float fadeInClickableCutOff = 0.5f;
@@ -224,6 +225,7 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 		failureReasons = looseReasons;
         DestroyAllActiveWindows();
 
+        redFlash.StartFlashing();
         currentState = GameStates.ROCKET_STARTING;
         BroadcastMessage("PlaySound", "Alarm", SendMessageOptions.DontRequireReceiver);
 
@@ -240,6 +242,7 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 
     private IEnumerator Explode(float waitTime) {
         yield return new WaitForSeconds(waitTime);
+        redFlash.StopFlashing();
         BroadcastMessage("PlaySound", "Boom", SendMessageOptions.DontRequireReceiver);
         endPanel.SetActive(true);
     }
