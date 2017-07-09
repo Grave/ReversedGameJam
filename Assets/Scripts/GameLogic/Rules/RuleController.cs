@@ -13,6 +13,7 @@ public class RuleController : IVariationContainer
 	private List<PressedTimeAdj> pressTimes;
 	private List<string> persistantButtonNames;
 	private List<string> oneShotButtonNames;
+	private List<string> radialOptions;
 
 	private List<IRule> availableRules;
 	private List<IRule> selectedRules;
@@ -28,6 +29,7 @@ public class RuleController : IVariationContainer
 		pressTimes = new List<PressedTimeAdj> ();
 		persistantButtonNames = new List<string> ();
 		oneShotButtonNames = new List<string> ();
+		radialOptions = new List<string> ();
 
 		availableRules = new List<IRule> ();
 		selectedRules = new List<IRule> ();
@@ -69,6 +71,8 @@ public class RuleController : IVariationContainer
 				buttonColors.Add (ButtonColorAdj.RED);
 				oneShotButtonNames.Add ("Guilherme");
 				persistantButtonNames.Add ("Cooling reactor");
+				radialOptions.Add ("Cooling reactor #3");
+				radialOptions.Add ("Blame Phillip");
 
 				variationsAdded.Add ("New button color: White\n");
 				variationsAdded.Add ("New button color: Red\n");
@@ -88,6 +92,9 @@ public class RuleController : IVariationContainer
 				buttonColors.Add (ButtonColorAdj.GREEN);
 				oneShotButtonNames.Add ("Phillip");
 				persistantButtonNames.Add ("Heating reactor");
+				radialOptions.Add ("Cooling reactor #2");
+				radialOptions.Add ("Blame Guilherme");
+				radialOptions.Add ("Ask Mom");
 
 				variationsAdded.Add ("New button color: Green\n");
 				variationsAdded.Add ("New message Source: Phillip\n");
@@ -123,6 +130,11 @@ public class RuleController : IVariationContainer
 
 		if (nameSrc && elmAttr) {
 			nameSrc.SetNameSource (GetRandomFrom (elmAttr.IsPersistent ? persistantButtonNames : oneShotButtonNames)); 
+		}
+
+		RadialOptionsOverride radial = obj.GetComponent<RadialOptionsOverride> ();
+		if (radial) {
+			radial.InitRadialOptions (radialOptions);
 		}
 	}
 

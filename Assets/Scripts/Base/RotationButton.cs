@@ -15,11 +15,11 @@ public class RotationButton : MonoBehaviour {
     private Vector2 oldPosition;
 
 
-    public void SetOptions(string[] optionTexts) {
+    public void SetOptions(List<string> optionTexts) {
         Shuffle(optionTexts);
         for (int i = 0; i < 4; ++i) {
             if (i < options.Length) {
-                if (i < optionTexts.Length) {
+                if (i < optionTexts.Count) {
                     options[i].GetComponent<Text>().text = optionTexts[i];
                 } else {
                     options[i].SetActive(false);
@@ -28,11 +28,11 @@ public class RotationButton : MonoBehaviour {
         }
     }
 
-    private void Shuffle(string[] texts) {
+    private void Shuffle(List<string> texts) {
         // Knuth shuffle algorithm :: courtesy of Wikipedia :)
-        for (int t = 0; t < texts.Length; t++) {
+        for (int t = 0; t < texts.Count; t++) {
             string tmp = texts[t];
-            int r = Random.Range(t, texts.Length);
+            int r = Random.Range(t, texts.Count);
             texts[t] = texts[r];
             texts[r] = tmp;
         }

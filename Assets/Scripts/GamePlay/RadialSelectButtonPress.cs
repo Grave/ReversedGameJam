@@ -9,7 +9,7 @@ public class RadialSelectButtonPress : MonoBehaviour {
     [SerializeField] private string buttonInteractionText = "PRESS THE BUTTON: ";
     [SerializeField] private RotationButton rotationButton;
 
-    [SerializeField] private string[] options = { "North", "West", "East", "South"};
+	[SerializeField] private List<string> options;
     private string currentNeededSelection;
 
     public float activationInterval;
@@ -22,11 +22,17 @@ public class RadialSelectButtonPress : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        rotationButton.SetOptions(options);
-        currentNeededSelection = options[Random.Range(0, options.Length)];
         window = GetComponentInParent<Window>();
-        StartCoroutine("StartLoop");
     }
+
+	public void Init(List<string> newOptions)
+	{
+		options = new List<string> (newOptions);
+
+		rotationButton.SetOptions(options);
+		currentNeededSelection = options[Random.Range(0, options.Count)];
+		StartCoroutine("StartLoop");
+	}
 
     void OnDestroy() {
         StopAllCoroutines();
@@ -66,7 +72,7 @@ public class RadialSelectButtonPress : MonoBehaviour {
 
     private void ShuffleSelection() {
         rotationButton.SetOptions(options);
-        currentNeededSelection = options[Random.Range(0, options.Length)];
+        currentNeededSelection = options[Random.Range(0, options.Count)];
     }
 
     bool IsActive() {
