@@ -179,6 +179,7 @@ MonoBehaviour:
   spawnableUIPrefabs:
   - {fileID: 1481525623037570, guid: 8460faa8e1a954bb084121573efed038, type: 2}
   - {fileID: 1170141810441344, guid: 72506bdb40b4759489aa56d081d9ff10, type: 2}
+  - {fileID: 1345307571085024, guid: 3f9ac58161ed3944486f41337439faa7, type: 2}
   briefingPanel: {fileID: 0}
   endOfDayPanel: {fileID: 0}
   timer: {fileID: 0}
