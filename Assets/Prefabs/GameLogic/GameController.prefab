@@ -196,9 +196,9 @@ MonoBehaviour:
   - 10
   delayBetweenSpawns:
   - 15
-  - 10
-  - 5
-  maxPersistentElement: 0100000003000000
+  - 14
+  - 14
+  maxPersistentElement: 01000000010000000200000003000000
   roundTime: 60
   canvas: {fileID: 0}
 --- !u!114 &114313178504673776
