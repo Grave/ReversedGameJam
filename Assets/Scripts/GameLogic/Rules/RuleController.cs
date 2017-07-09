@@ -15,6 +15,9 @@ public class RuleController : IVariationContainer
 	private List<string> oneShotButtonNames;
 	private List<string> radialOptions;
 
+	bool radialYaxisUnlocked;
+	bool radialNormalUnlocked;
+
 	private List<IRule> availableRules;
 	private List<IRule> selectedRules;
 
@@ -30,6 +33,9 @@ public class RuleController : IVariationContainer
 		persistantButtonNames = new List<string> ();
 		oneShotButtonNames = new List<string> ();
 		radialOptions = new List<string> ();
+
+		radialYaxisUnlocked = false;
+		radialNormalUnlocked = false;
 
 		availableRules = new List<IRule> ();
 		selectedRules = new List<IRule> ();
@@ -73,6 +79,8 @@ public class RuleController : IVariationContainer
 				persistantButtonNames.Add ("Cooling reactor");
 				radialOptions.Add ("Cooling reactor #3");
 				radialOptions.Add ("Blame Phillip");
+				radialNormalUnlocked = true;
+				radialYaxisUnlocked = true;
 
 				variationsAdded.Add ("New button color: White\n");
 				variationsAdded.Add ("New button color: Red\n");
@@ -134,7 +142,7 @@ public class RuleController : IVariationContainer
 
 		RadialOptionsOverride radial = obj.GetComponent<RadialOptionsOverride> ();
 		if (radial) {
-			radial.InitRadialOptions (radialOptions);
+			radial.InitRadialOptions (radialOptions, radialYaxisUnlocked, radialNormalUnlocked);
 		}
 	}
 

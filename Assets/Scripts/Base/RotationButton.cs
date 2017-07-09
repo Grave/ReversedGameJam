@@ -14,8 +14,13 @@ public class RotationButton : MonoBehaviour {
     private bool mouseButtonDown = false;
     private Vector2 oldPosition;
 
+	public void SetControls(bool useXAxis, bool invert)
+	{
+		this.xAxis = useXAxis;
+		this.invert = invert;
+	}
 
-    public void SetOptions(List<string> optionTexts) {
+	public void SetOptions(List<string> optionTexts) {
         Shuffle(optionTexts);
         for (int i = 0; i < 4; ++i) {
             if (i < options.Length) {

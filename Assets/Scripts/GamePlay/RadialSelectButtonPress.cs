@@ -25,10 +25,11 @@ public class RadialSelectButtonPress : MonoBehaviour {
         window = GetComponentInParent<Window>();
     }
 
-	public void Init(List<string> newOptions)
+	public void Init(List<string> newOptions, bool useXaxis, bool invert)
 	{
 		options = new List<string> (newOptions);
 
+		rotationButton.SetControls (useXaxis, invert);
 		rotationButton.SetOptions(options);
 		currentNeededSelection = options[Random.Range(0, options.Count)];
 		StartCoroutine("StartLoop");
