@@ -16,7 +16,7 @@ public class NameSource : MonoBehaviour
 	public void SetNameSource(string newName)
 	{
 		nameSource = newName;
-		textField.text = newName + " " + GetRandomFluffText();
+		textField.text = newName + ": " + GetRandomFluffText();
 	}
 
 	public string GetNameSource()
