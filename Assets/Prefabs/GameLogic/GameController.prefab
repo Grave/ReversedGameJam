@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114252083274907110}
   - component: {fileID: 114313178504673776}
   - component: {fileID: 114174109493983962}
+  - component: {fileID: 114591544762356266}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -185,13 +186,20 @@ MonoBehaviour:
   endOfDayPanel: {fileID: 0}
   timer: {fileID: 0}
   fadeIn: {fileID: 0}
+  redFlash: {fileID: 114591544762356266}
   fadeInTime: 1
   fadeOutTime: 1
   fadeInClickableCutOff: 0.5
   endPanel: {fileID: 0}
   rocketExplosionDelay: 3
-  delayBetweenSpawns: 15
-  maxPersistentElement: 3
+  startDelay:
+  - 2
+  - 10
+  delayBetweenSpawns:
+  - 15
+  - 14
+  - 14
+  maxPersistentElement: 01000000010000000200000003000000
   roundTime: 60
   canvas: {fileID: 0}
 --- !u!114 &114313178504673776
@@ -223,3 +231,17 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9cb429017e2663843bf6226ee6caca15, type: 3}
   - key: Alarm
     clip: {fileID: 8300000, guid: e76f704c55b049d4da9d1ebe2e9bfac8, type: 3}
+--- !u!114 &114591544762356266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923183048650684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6811ce6bd4cd5404eb75fd18b73f844b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redShade: {fileID: 0}
+  flashTime: 0.9
+  maxFlash: 1
