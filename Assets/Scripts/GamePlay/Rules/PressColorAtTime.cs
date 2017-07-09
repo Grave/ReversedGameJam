@@ -36,7 +36,7 @@ public class PressColorAtTime : IRule
 		var colorDescription = ButtonColorTranslator.GetDescriptionFor(colorAdj);
 		var timeDescription = PressedTimeTranslator.GetDescriptionFor(timeAdj);
 
-		return colorDescription + " buttons should pressed only in " + timeDescription + "!\n";
+		return colorDescription + " buttons should pressed only in " + timeDescription + "!";
 	}
 	#endregion
 

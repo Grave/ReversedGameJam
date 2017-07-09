@@ -26,7 +26,7 @@ public class IgnoreMessageFrom : IRule
 
 	public string GetDescription ()
 	{
-		return "Messages from " + nameToIgnore + " should be ignored\n";
+		return "Messages from " + nameToIgnore + " should be ignored";
 	}
 	#endregion
 
