@@ -16,8 +16,11 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     [SerializeField] private float fadeInClickableCutOff = 0.5f;
     [SerializeField] private GameObject endPanel;
     [SerializeField] private float rocketExplosionDelay = 3.0f;
-	[SerializeField] private float delayBetweenSpawns = 2.0f;
-    [SerializeField] private int maxPersistentElement = 3;
+
+    [SerializeField] private float[] startDelay;
+    [SerializeField] private float[] delayBetweenSpawns;
+    [SerializeField] private int[] maxPersistentElement;
+    
     [SerializeField] private float roundTime = 60f;
     [SerializeField] private GameObject canvas;
 
@@ -53,7 +56,7 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
         BroadcastMessage("PlaySound", "MorningCrow", SendMessageOptions.DontRequireReceiver);
         currentState = GameStates.BRIEFING;
         briefingPanel.SetActive(true);
-        delayUntilNextSpawn = GetCurrentDelayBetweenSpanws();
+        delayUntilNextSpawn = GetLevelArrayValue(startDelay);
 
 		ruleController.OnDay(currentLevel);
 		var briefingText = briefingPanel.GetComponent<BriefingText> ();
@@ -84,7 +87,13 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
     }
 
     private float GetCurrentDelayBetweenSpanws() {
-        return delayBetweenSpawns;
+        return GetLevelArrayValue(delayBetweenSpawns);
+    }
+
+    private T GetLevelArrayValue<T>(T[] values) {
+        int index = currentLevel - 1;
+        index = Mathf.Clamp(index, 0, values.Length - 1);
+        return values[index];
     }
 
     private void InitSpawnableUIsForLevel() {
@@ -192,7 +201,7 @@ public class GameController : JamUtilities.MonoSingleton<GameController> {
 
         if (eA.IsPersistent) {
             ++currentPresistentElements;
-            if (currentPresistentElements >= maxPersistentElement) {
+            if (currentPresistentElements >= GetLevelArrayValue(maxPersistentElement)) {
                 PurgetPersistentElements();
             }
         }

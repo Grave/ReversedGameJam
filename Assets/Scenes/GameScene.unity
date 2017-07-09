@@ -324,25 +324,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c0a7eae18a53ad4086432f1d21fe93b, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &306036738 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1923183048650684, guid: 3930dea748387a44d91ab5d6b364b409,
-    type: 2}
-  m_PrefabInternal: {fileID: 1684976685}
---- !u!114 &306036739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 306036738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6811ce6bd4cd5404eb75fd18b73f844b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  redShade: {fileID: 1015583898}
-  flashTime: 0.9
-  maxFlash: 1
 --- !u!1 &352786884
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +977,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114591544762356266, guid: 3930dea748387a44d91ab5d6b364b409,
+        type: 2}
+      propertyPath: redShade
+      value: 
+      objectReference: {fileID: 1015583898}
     - target: {fileID: 114252083274907110, guid: 3930dea748387a44d91ab5d6b364b409,
         type: 2}
       propertyPath: briefingPanel
@@ -1026,11 +1012,6 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 63356009}
-    - target: {fileID: 114252083274907110, guid: 3930dea748387a44d91ab5d6b364b409,
-        type: 2}
-      propertyPath: redFlash
-      value: 
-      objectReference: {fileID: 306036739}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3930dea748387a44d91ab5d6b364b409, type: 2}
   m_IsPrefabParent: 0
