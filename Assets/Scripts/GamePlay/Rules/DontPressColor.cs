@@ -26,7 +26,7 @@ public class DontPressColor : IRule
 
 	public string GetDescription ()
 	{
-		return ButtonColorTranslator.GetDescriptionFor(colorAdj) + " buttons should not be pressed!\n";
+		return ButtonColorTranslator.GetDescriptionFor(colorAdj) + " buttons should not be pressed!";
 	}
 	#endregion
 	
