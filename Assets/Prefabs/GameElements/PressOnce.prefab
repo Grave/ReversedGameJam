@@ -552,7 +552,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textField: {fileID: 114615007421154518}
-  fluffTextAfterName: here, everything alright?
+  fluffTextAfterName:
+  - Stuff
 --- !u!222 &222224269070617096
 CanvasRenderer:
   m_ObjectHideFlags: 1

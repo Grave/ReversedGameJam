@@ -218,7 +218,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textField: {fileID: 114787572098591414}
-  fluffTextAfterName: notification window
+  fluffTextAfterName:
+  - Is everything alright?
+  - Are you alright?
+  - This is the best job in the world!
 --- !u!114 &114084388249586702
 MonoBehaviour:
   m_ObjectHideFlags: 1

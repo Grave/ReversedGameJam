@@ -856,7 +856,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textField: {fileID: 114927765699946746}
-  fluffTextAfterName: here, everything alright?
+  fluffTextAfterName:
+  - Fix me
 --- !u!114 &114965432841692630
 MonoBehaviour:
   m_ObjectHideFlags: 1
